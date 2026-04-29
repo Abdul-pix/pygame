@@ -20,3 +20,7 @@ Het level wordt willekeurig gegenereerd zodat elke run anders is.
 - level_generator.py: maakt het level
 - finish.py: eindpunt
 - score_manager.py: score en tijd
+
+# Groep
+Naam: Abdulrahman Kadhim  
+WPO-groep: 3
