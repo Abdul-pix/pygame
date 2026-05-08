@@ -1,26 +1,62 @@
-# 2D spel gemaakt in Python met pygame
+# RUN.EXE
 
-Dit is een klein 2D platformspel gemaakt in Python met pygame.  
-Je loopt links en rechts met ← → en je springt met ↑ of spatie.  
-Je kunt het spel starten met Enter. Het doel van het spel is om zo snel mogelijk de finish te bereiken zonder in een gat te vallen of geraakt te worden door de vijand. Hoe sneller je finisht, hoe meer punten je krijgt.
+2D platformspel gemaakt in Python met pygame.
 
-De vijand gebruikt simpele AI:  
-- hij volgt je  
-- hij springt als jij ook springt  
-- hij wordt sneller naarmate de tijd stijgt  
-- hij respawnt als hij valt
+## Gameplay
 
-Het level wordt willekeurig gegenereerd zodat elke run anders is.
+De speler beweegt met:
+- ← →
+- ↑ of spatie om te springen
+- ENTER om het spel te starten of opnieuw te starten
 
-# Bestanden
-- main.py: hoofdprogramma
-- player.py: speler
-- enemy.py: vijand
-- platform.py: platformen
-- level_generator.py: maakt het level
-- finish.py: eindpunt
-- score_manager.py: score en tijd
+Het doel van het spel is om zo snel mogelijk de finish te bereiken zonder:
+- in een gat te vallen
+- geraakt te worden door de vijand
+- geraakt te worden door lasers
 
-# Groep
+Hoe sneller je de finish bereikt, hoe hoger je score.
+
+## Enemy AI
+
+De vijand gebruikt simpele AI:
+- volgt de speler automatisch
+- springt over gaten
+- wordt sneller naarmate de tijd stijgt
+- schiet horizontale lasers richting de speler
+- respawnt als hij van het level valt
+
+## Extra mechanics
+
+- Willekeurig gegenereerde levels
+- Shield power-ups
+- Score gebaseerd op tijd
+- Botsingen met platformen en objecten
+- Zwaartekracht
+
+## Klassenstructuur
+
+Het project gebruikt objectgeoriënteerd programmeren met een abstracte hoofdklasse:
+
+- `GameObject`
+    - `Player`
+    - `Enemy`
+    - `Platform`
+    - `Finish`
+    - `PowerUp`
+
+## Bestanden
+
+- `main.py` → hoofdgame en game loop
+- `game_object.py` → abstracte hoofdklasse + collision systeem
+- `player.py` → speler
+- `enemy.py` → vijand + lasers
+- `platform.py` → platformen
+- `finish.py` → finishlijn
+- `powerups.py` → shield power-up
+- `level_generator.py` → random level generator
+- `score_manager.py` → score en tijd
+
+## Groep
+
 Naam: Abdulrahman Kadhim  
 WPO-groep: 3
