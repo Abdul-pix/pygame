@@ -1,9 +1,12 @@
 import random
 from platform import Platform
 from finish import Finish
+from powerups import PowerUp
+
 
 def make_level(screen_h):
     platforms = []
+    powerups = []
     ground_y = screen_h - 70
 
     platforms.append(Platform(0, ground_y, 600, 70))
@@ -21,10 +24,15 @@ def make_level(screen_h):
         if y > ground_y:
             y = ground_y
 
-        platforms.append(Platform(x + gap, y, w, 40))
+        platform = Platform(x + gap, y, w, 40)
+        platforms.append(platform)
+
+        if i == 3 or i == 7:
+            powerups.append(PowerUp(platform.x + w // 2, platform.y - 35))
+
         x += gap + w
 
     platforms.append(Platform(x + 100, ground_y, 500, 70))
     finish = Finish(x + 350, ground_y - 120)
 
-    return platforms, finish
+    return platforms, finish, powerups
