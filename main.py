@@ -11,6 +11,7 @@ SCREEN_H = 600
 FPS = 60
 GRAVITY = 0.45
 
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -25,9 +26,9 @@ class Game:
         self.reset()
 
     def reset(self):
-        self.platforms, self.finish = make_level(SCREEN_H)
-        ground_y = SCREEN_H - 70
+        self.platforms, self.finish, self.powerups = make_level(SCREEN_H)
 
+        ground_y = SCREEN_H - 70
         self.player = Player(120, ground_y - 40)
         self.enemy = Enemy(30, ground_y - 40)
 
@@ -71,11 +72,24 @@ class Game:
         if self.camera_x < 0:
             self.camera_x = 0
 
+        for powerup in self.powerups:
+            if powerup.active and self.player.collides_with(powerup):
+                self.player.shield = True
+                powerup.active = False
+
         if self.player.y > SCREEN_H + 100:
             self.state = "dead"
 
         if self.player.collides_with(self.enemy):
-            self.state = "dead"
+            if not self.player.use_shield():
+                self.state = "dead"
+
+        for laser in self.enemy.lasers[:]:
+            if self.player.collides_with(laser):
+                if self.player.use_shield():
+                    self.enemy.lasers.remove(laser)
+                else:
+                    self.state = "dead"
 
         if self.player.collides_with(self.finish):
             self.final_score = self.score.get_score()
@@ -86,6 +100,9 @@ class Game:
 
         for p in self.platforms:
             p.draw(self.screen, self.camera_x)
+
+        for powerup in self.powerups:
+            powerup.draw(self.screen, self.camera_x)
 
         self.finish.draw(self.screen, self.camera_x)
         self.enemy.draw(self.screen, self.camera_x)
@@ -106,15 +123,30 @@ class Game:
     def draw_hud(self):
         s = self.score.get_score()
         t = int(self.score.get_time())
-        txt = self.font.render(f"Score: {s}   Tijd: {t}", True, (255, 255, 255))
+
+        shield_text = ""
+        if self.player.shield:
+            shield_text = "   Schild: AAN"
+
+        txt = self.font.render(
+            f"Score: {s}   Tijd: {t}{shield_text}",
+            True,
+            (255, 255, 255)
+        )
         self.screen.blit(txt, (20, 20))
 
     def draw_msg(self, title, sub):
-        t = self.big_font.render(title, True, (0, 220, 180))
-        s = self.font.render(sub, True, (255, 255, 255))
+        title_text = self.big_font.render(title, True, (0, 220, 180))
+        sub_text = self.font.render(sub, True, (255, 255, 255))
 
-        self.screen.blit(t, (SCREEN_W//2 - t.get_width()//2, 230))
-        self.screen.blit(s, (SCREEN_W//2 - s.get_width()//2, 300))
+        self.screen.blit(
+            title_text,
+            (SCREEN_W // 2 - title_text.get_width() // 2, 230)
+        )
+        self.screen.blit(
+            sub_text,
+            (SCREEN_W // 2 - sub_text.get_width() // 2, 300)
+        )
 
 
 if __name__ == "__main__":
