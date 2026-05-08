@@ -1,6 +1,7 @@
 import pygame
 from game_object import GameObject
 
+
 class Player(GameObject):
     def __init__(self, x, y):
         super().__init__(x, y, 30, 40)
@@ -9,6 +10,7 @@ class Player(GameObject):
         self.speed = 4
         self.jump_force = -10
         self.on_ground = False
+        self.shield = False
 
     def update(self, platforms, gravity):
         keys = pygame.key.get_pressed()
@@ -34,6 +36,12 @@ class Player(GameObject):
         self.on_ground = False
         self.check_y_collision(platforms)
 
+    def use_shield(self):
+        if self.shield:
+            self.shield = False
+            return True
+        return False
+
     def check_x_collision(self, platforms):
         for p in platforms:
             if self.collides_with(p):
@@ -54,5 +62,13 @@ class Player(GameObject):
                     self.vy = 0
 
     def draw(self, screen, cam_x):
-        pygame.draw.rect(screen, (0, 200, 180),
-                         (self.x - cam_x, self.y, self.width, self.height))
+        if self.shield:
+            color = (0, 150, 255)
+        else:
+            color = (0, 200, 180)
+
+        pygame.draw.rect(
+            screen,
+            color,
+            (self.x - cam_x, self.y, self.width, self.height)
+        )
