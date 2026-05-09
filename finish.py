@@ -27,7 +27,7 @@ class Finish(GameObject):
 
     def draw(self, screen, cam_x):
         """
-        Teken de finishlijn: een witte paal met een gele vlag erboven.
+        Dit tekent de finishlijn: een witte paal met een gele vlag erboven.
 
         Args:
             screen (pygame.Surface): Het scherm waarop we tekenen.
