@@ -15,7 +15,7 @@ class Player(GameObject):
 
     def __init__(self, x, y):
         """
-        Maak de speler aan op de gegeven startpositie.
+        Dit maakt de speler aan op de gegeven startpositie.
 
         Args:
             x (float): Horizontale startpositie.
