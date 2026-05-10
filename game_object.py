@@ -5,7 +5,6 @@ Elke klasse zoals speler, vijand, platform, ... erft hiervan.
 """
 
 from abc import ABC, abstractmethod
-import pygame
 
 
 class GameObject(ABC):
