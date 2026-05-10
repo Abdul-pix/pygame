@@ -50,7 +50,7 @@ Het project gebruikt objectgeoriënteerd programmeren met een abstracte hoofdkla
 - `game_object.py` → abstracte hoofdklasse + collision systeem
 - `player.py` → speler
 - `enemy.py` → vijand + lasers
-- `platform.py` → platformen
+- `platforms.py` → platformen
 - `finish.py` → finishlijn
 - `powerups.py` → shield power-up
 - `level_generator.py` → random level generator
@@ -60,3 +60,5 @@ Het project gebruikt objectgeoriënteerd programmeren met een abstracte hoofdkla
 
 Naam: Abdulrahman Kadhim  
 WPO-groep: 3
+
+## GitHub
