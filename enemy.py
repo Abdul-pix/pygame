@@ -121,12 +121,13 @@ class Enemy(GameObject):
 
     def follow_player(self, player):
         """
-        Beweeg de vijand richting de speler via een state machine.
-        Gebruikt twee states: patrol (ver weg) en chase (dichtbij).
+        Dit bepaalt de AI-state van de vijand.
 
-        In patrol-state beweegt de vijand traag vooruit.
-        In chase-state wordt de richtingsvector genormaliseerd en
-        geschaald met self.speed zodat de snelheid altijd gelijk is.
+        Als de speler ver weg is, gebruikt de vijand patrol:
+        hij beweegt rustig vooruit.
+
+        Als de speler dichtbij is, gebruikt de vijand chase:
+        hij achtervolgt de speler met vectorberekening.
 
         Args:
             player (Player): De speler om naartoe te bewegen.
