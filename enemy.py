@@ -47,8 +47,8 @@ class Enemy(GameObject):
     De vijand met AI die de speler achtervolgt.
 
     Smart Design:
-    - Gebruikt vectorberekening om altijd even snel naar de speler te bewegen,
-      ongeacht de richting of afstand.
+    - Gebruikt een state machine met twee states: patrol en chase.
+    - In chase-state: vectorberekening om altijd even snel naar de speler te bewegen.
     - Springt automatisch over gaten en muren.
     - Schiet elke 100 frames een laser af richting de speler.
     - Wordt sneller naarmate de tijd vordert, maximaal snelheid 5.
@@ -71,6 +71,7 @@ class Enemy(GameObject):
         self.jump_wait = 0       # wacht een aantal frames voor de volgende sprong
         self.lasers = []
         self.shoot_timer = 0
+        self.state = "chase"
 
     def update(self, player, platforms, gravity, time_passed):
         """
@@ -120,11 +121,12 @@ class Enemy(GameObject):
 
     def follow_player(self, player):
         """
-        Beweeg de vijand richting de speler via vectorberekening.
+        Beweeg de vijand richting de speler via een state machine.
+        Gebruikt twee states: patrol (ver weg) en chase (dichtbij).
 
-        We berekenen de richtingsvector van de vijand naar de speler,
-        normaliseren die (lengte = 1) en schalen hem met self.speed.
-        Zo beweegt de vijand altijd even snel, ongeacht de afstand.
+        In patrol-state beweegt de vijand traag vooruit.
+        In chase-state wordt de richtingsvector genormaliseerd en
+        geschaald met self.speed zodat de snelheid altijd gelijk is.
 
         Args:
             player (Player): De speler om naartoe te bewegen.
@@ -133,10 +135,15 @@ class Enemy(GameObject):
         dy = player.y - self.y
         distance = math.sqrt(dx ** 2 + dy ** 2)
 
-        if distance > 0:
-            self.vx = (dx / distance) * self.speed
+        if abs(dx) > 400:
+            self.state = "patrol"
+            self.vx = 1
         else:
-            self.vx = 0
+            self.state = "chase"
+            if distance > 0:
+                self.vx = (dx / distance) * self.speed
+            else:
+                self.vx = 0
 
     def try_jump_over_gap(self, platforms):
         """
