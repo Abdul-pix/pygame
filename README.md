@@ -24,6 +24,8 @@ De vijand gebruikt simpele AI:
 - wordt sneller naarmate de tijd stijgt
 - schiet horizontale lasers richting de speler
 - respawnt als hij van het level valt
+- gebruikt een state machine: patrol-state als de speler ver weg is, 
+  chase-state als de speler dichtbij is
 
 ## Extra mechanics
 
@@ -62,3 +64,5 @@ Naam: Abdulrahman Kadhim
 WPO-groep: 3
 
 ## GitHub
+
+https://github.com/Abdul-pix/pygame
