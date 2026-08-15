@@ -28,7 +28,7 @@ class TurretEnemy(GameObject):
         self.vertical_range = 100
 
         self.shoot_timer = 0
-        self.shoot_delay = 40
+        self.shoot_delay = 50
 
         self.lasers = []
 
