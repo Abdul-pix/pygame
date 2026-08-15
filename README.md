@@ -26,6 +26,18 @@ De vijand gebruikt simpele AI:
 - respawnt als hij van het level valt
 - gebruikt een state machine: patrol-state als de speler ver weg is, 
   chase-state als de speler dichtbij is
+  
+## Smart Design
+
+Het spel gebruikt verschillende vormen van rule-based Smart Design:
+
+- De bewegende Enemy gebruikt patrol/chase states.
+- De Enemy berekent de richting en afstand tot de speler.
+- De Enemy detecteert gaten en springt automatisch.
+- De Enemy wordt geleidelijk sneller.
+- De TurretEnemy gebruikt idle/attack states.
+- De TurretEnemy bewaakt een gebied en schiet als de speler binnen bereik komt.
+- De levelgenerator bouwt willekeurige levels binnen vaste speelbaarheidsgrenzen.
 
 ## Extra mechanics
 
