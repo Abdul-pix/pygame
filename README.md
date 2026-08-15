@@ -51,12 +51,14 @@ Het spel gebruikt verschillende vormen van rule-based Smart Design:
 
 Het project gebruikt objectgeoriënteerd programmeren met een abstracte hoofdklasse:
 
-- `GameObject`
-    - `Player`
-    - `Enemy`
-    - `Platform`
-    - `Finish`
-    - `PowerUp`
+GameObject
+├── Player
+├── Enemy
+├── TurretEnemy
+├── Laser
+├── Platform
+├── Finish
+└── PowerUp
 
 ## Bestanden
 
