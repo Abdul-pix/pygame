@@ -55,10 +55,13 @@ GameObject
 ├── Player
 ├── Enemy
 ├── TurretEnemy
-├── Laser
 ├── Platform
 ├── Finish
 └── PowerUp
+
+Game
+LevelGenerator
+ScoreManager
 
 ## Bestanden
 
