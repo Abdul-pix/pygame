@@ -66,6 +66,7 @@ GameObject
 - `game_object.py` → abstracte hoofdklasse + collision systeem
 - `player.py` → speler
 - `enemy.py` → vijand + lasers
+- `turret_enemy.py` → 2de vijand en lasers
 - `platforms.py` → platformen
 - `finish.py` → finishlijn
 - `powerups.py` → shield power-up
