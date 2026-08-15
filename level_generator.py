@@ -10,7 +10,7 @@ import random
 from platforms import Platform
 from finish import Finish
 from powerups import PowerUp
-
+from turret_enemy import TurretEnemy
 
 def make_level(screen_h):
     """
@@ -38,6 +38,7 @@ def make_level(screen_h):
     platform_list = []
     powerup_list = []
     ground_y = screen_h - 70
+    turret_list = []
 
     # Startplatform: breed zodat de speler gemakkelijk kan beginnen
     platform_list.append(Platform(0, ground_y, 600, 70))
@@ -72,6 +73,14 @@ def make_level(screen_h):
 
         platform = Platform(x + gap, y, width, 40)
         platform_list.append(platform)
+        # Plaats één turret op platform 6.
+        if i == 5:
+            turret_x = platform.x + platform.width - 50
+            turret_y = platform.y - 40
+
+            turret_list.append(
+                TurretEnemy(turret_x, turret_y)
+           )
 
         # Powerup op platform 4 en 8 (index 3 en 7)
         if i == 3 or i == 7:
@@ -83,4 +92,4 @@ def make_level(screen_h):
     platform_list.append(Platform(x + 100, ground_y, 500, 70))
     finish = Finish(x + 350, ground_y - 120)
 
-    return platform_list, finish, powerup_list
+    return platform_list, finish, powerup_list, turret_list
